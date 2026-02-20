@@ -1,0 +1,967 @@
+<!-- ===========================
+FILE: index.html
+Put this in your repo root as: index.html
+=========================== -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merge.AI — Everything. Together.</title>
+
+  <!-- Tailwind CDN (Landing page uses it) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --deep:    #050816;
+      --navy:    #090e28;
+      --purple:  #7b2fff;
+      --violet:  #a855f7;
+      --pink:    #e040fb;
+      --cyan:    #00e5ff;
+      --teal:    #00bcd4;
+      --white:   #f0f4ff;
+      --muted:   #8892b0;
+      --border:  rgba(124,47,255,.22);
+      --card:    rgba(255,255,255,.03);
+      --grad:    linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+      --grad-text: linear-gradient(135deg, #a855f7 0%, #00e5ff 60%, #00bcd4 100%);
+      --glow-p:  0 0 28px rgba(123,47,255,.35);
+      --glow-c:  0 0 28px rgba(0,229,255,.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Stars */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.75) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 6%,  rgba(200,180,255,.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 65% 12%, rgba(255,255,255,.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 25%, rgba(180,230,255,.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5%  52%, rgba(255,255,255,.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 28% 68%, rgba(200,180,255,.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 58% 78%, rgba(255,255,255,.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 62%, rgba(180,230,255,.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 48% 38%, rgba(120,100,255,.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 72%, rgba(255,255,255,.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 86%, rgba(200,180,255,.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 73% 48%, rgba(255,255,255,.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 42% 92%, rgba(180,230,255,.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 92% 45%, rgba(200,180,255,.3) 0%, transparent 100%);
+    }
+
+    h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--white); }
+    .gradient-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .muted { color: var(--muted); }
+
+    .nav-glass {
+      background: rgba(5,8,22,.75);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+    }
+
+    .btn-brand {
+      background: var(--grad);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      letter-spacing: .02em;
+      transition: opacity .2s, box-shadow .2s, transform .1s;
+      box-shadow: var(--glow-p);
+    }
+    .btn-brand:hover { opacity: .88; box-shadow: var(--glow-p), var(--glow-c); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      background: transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: rgba(123,47,255,.5); background: rgba(123,47,255,.07); }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(123,47,255,.07), rgba(0,229,255,.03));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .card:hover { border-color: rgba(123,47,255,.45); box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 30px rgba(123,47,255,.12); transform: translateY(-3px); }
+    .card:hover::before { opacity: 1; }
+
+    .logo-badge {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--glow-p);
+      flex-shrink: 0;
+    }
+    .logo-badge--sm { width: 28px; height: 28px; border-radius: 8px; }
+    .logo-badge__m { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; color: #fff; line-height: 1; }
+    .wordmark { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--white); letter-spacing: -.01em; }
+
+    .glow-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--purple), transparent);
+      opacity: .3;
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      border: 1px solid rgba(0,229,255,.3);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 500;
+      color: var(--cyan);
+      letter-spacing: .07em; text-transform: uppercase;
+      background: rgba(0,229,255,.06);
+    }
+
+    .pulse-dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(1.4); } }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    .icon-box {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: var(--glow-p);
+      flex-shrink: 0;
+    }
+
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 16px; color: #fff;
+      box-shadow: var(--glow-p);
+      flex-shrink: 0;
+    }
+
+    .pricing-popular-wrap { background: var(--grad); border-radius: 18px; padding: 2px; box-shadow: var(--glow-p), var(--glow-c); }
+    .pricing-popular-inner { background: #0d1235; border-radius: 16px; position: relative; }
+
+    .stars { color: #fbbf24; letter-spacing: .05em; }
+
+    /* FAQ accordion */
+    .faq-item .answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .answer { max-height: 420px; }
+    .faq-item .chevron { transition: transform .3s; }
+    .faq-item.open .chevron { transform: rotate(180deg); }
+
+    footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--white); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(5,8,22,.85);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: #0d1235;
+      border: 1px solid rgba(123,47,255,.35);
+      border-radius: 20px;
+      width: 100%; max-width: 520px;
+      max-height: 90vh; overflow-y: auto;
+      transform: scale(.95) translateY(18px);
+      transition: transform .3s;
+    }
+    .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+    .field {
+      width: 100%;
+      padding: 13px 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field::placeholder { color: rgba(136,146,176,.55); }
+    .field:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(123,47,255,.14); }
+
+    @keyframes confetti-fall {
+      0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
+    }
+    .confetti-piece { animation: confetti-fall 1.4s ease-out forwards; }
+
+    .hero-blob {
+      position: absolute;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(900px, 100vw);
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(123,47,255,.22) 0%, rgba(0,229,255,.08) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Demo modal video box */
+    .demo-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(240,244,255,.75);
+      font-size: 14px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--deep); }
+    ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+    @media (max-width: 768px) {
+      nav .nav-links { display: none; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0);    }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav-glass fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3" style="text-decoration:none">
+      <div class="logo-badge"><span class="logo-badge__m">M</span></div>
+      <span class="wordmark text-xl">Merge<span class="gradient-text">.AI</span></span>
+    </a>
+
+    <div class="nav-links hidden md:flex items-center gap-8" style="font-size:14px; font-weight:500;">
+      <a href="#features" style="color:var(--muted); text-decoration:none;">Features</a>
+      <a href="#how" style="color:var(--muted); text-decoration:none;">How it works</a>
+      <a href="#pricing" style="color:var(--muted); text-decoration:none;">Pricing</a>
+      <a href="#faq" style="color:var(--muted); text-decoration:none;">FAQ</a>
+      <a href="./careers.html" style="color:var(--muted); text-decoration:none;">Careers</a>
+    </div>
+
+    <button onclick="openWaitlistModal()" class="btn-brand px-5 py-2.5 rounded-xl" style="font-size:14px">Join Waitlist</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-36 md:pt-44 pb-20 px-6 text-center overflow-hidden">
+  <div class="hero-blob"></div>
+  <div class="relative z-10 max-w-6xl mx-auto">
+
+    <div class="pill mb-6" style="animation: fadeUp .6s ease both">
+      <div class="pulse-dot"></div>
+      Launching Soon — Join <strong id="waitlist-count" style="color:var(--cyan)">12,847</strong> builders
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight"
+        style="animation: fadeUp .6s .1s ease both; opacity:0; animation-fill-mode:both">
+      Stop Juggling.<br>
+      <span class="gradient-text">Start Merging.</span>
+    </h1>
+
+    <p class="mt-6 max-w-xl mx-auto text-lg md:text-xl muted"
+       style="font-weight:300; animation: fadeUp .6s .2s ease both; opacity:0; animation-fill-mode:both">
+      Notes, tasks, chat, and files in a single AI-powered workspace. Privacy-first and blazing fast.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+         style="animation: fadeUp .6s .3s ease both; opacity:0; animation-fill-mode:both">
+      <button onclick="openWaitlistModal()" class="btn-brand px-8 py-4 rounded-2xl" style="font-size:16px">
+        Get Early Access ✦
+      </button>
+      <button onclick="openDemoModal()" class="btn-outline px-8 py-4 rounded-2xl" style="font-size:15px">
+        Watch Demo
+      </button>
+    </div>
+
+    <!-- Mock UI -->
+    <div class="mt-14 max-w-5xl mx-auto" style="animation: fadeUp .6s .45s ease both; opacity:0; animation-fill-mode:both">
+      <div class="card rounded-3xl p-1">
+        <div style="background:#090e28; border-radius:22px; padding:24px 28px">
+          <div class="flex items-center justify-between pb-5" style="border-bottom: 1px solid var(--border)">
+            <div class="flex items-center gap-2 flex-wrap">
+              <div class="mock-tab active">📝 Notes</div>
+              <div class="mock-tab">✅ Tasks</div>
+              <div class="mock-tab">💬 Chat</div>
+              <div class="mock-tab">📅 Calendar</div>
+              <div class="mock-tab">📁 Files</div>
+            </div>
+            <div class="mock-tab active" style="background:linear-gradient(135deg,rgba(123,47,255,.3),rgba(0,229,255,.15)); border-color:rgba(0,229,255,.4)">
+              🤖 Merge AI
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-5">
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">🎯</div><div style="font-size:11px; color:var(--muted)">Goals</div></div>
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">📊</div><div style="font-size:11px; color:var(--muted)">Analytics</div></div>
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">🤝</div><div style="font-size:11px; color:var(--muted)">Collab</div></div>
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">🔔</div><div style="font-size:11px; color:var(--muted)">Alerts</div></div>
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">🎨</div><div style="font-size:11px; color:var(--muted)">Design</div></div>
+            <div class="mock-icon-card"><div style="font-size:22px;margin-bottom:6px">📈</div><div style="font-size:11px; color:var(--muted)">Reports</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="glow-divider mx-6"></div>
+
+<!-- PROBLEM -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto reveal">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">
+      You're drowning in apps.<br><span class="gradient-text">We get it.</span>
+    </h2>
+    <p class="text-center muted mb-14" style="font-weight:300">
+      The average knowledge worker wastes hours every day switching context.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card rounded-2xl p-8">
+        <div class="stat-num mb-2">23</div>
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:8px;">Apps Daily</h3>
+        <p class="muted" style="font-size:14px; line-height:1.7">Most knowledge workers jump across ~23 tools a day just to get work done.</p>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <div class="stat-num mb-2">2.5h</div>
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:8px;">Lost Weekly</h3>
+        <p class="muted" style="font-size:14px; line-height:1.7">Context switching, searching, and re-creating the same info eats your focus.</p>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <div class="stat-num mb-2">∞</div>
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:8px;">Mental Overload</h3>
+        <p class="muted" style="font-size:14px; line-height:1.7">Merge turns chaos into a single source of truth. One place for everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto reveal">
+    <div class="text-center mb-14">
+      <div class="pill mx-auto mb-5" style="width:fit-content">Features</div>
+      <h2 class="text-4xl md:text-5xl font-extrabold">Everything you need.<br><span class="gradient-text">Nothing you don't.</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card rounded-2xl p-8">
+        <div class="icon-box mb-5">🗂️</div>
+        <h3 style="font-size:22px; font-weight:700; margin-bottom:10px;">Unified Workspace</h3>
+        <p class="muted" style="line-height:1.7">Notes, tasks, files, and calendar in one clean UI. No switching context. Just flow.</p>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <div class="icon-box mb-5">🤖</div>
+        <h3 style="font-size:22px; font-weight:700; margin-bottom:10px;">Merge AI Assistant</h3>
+        <p class="muted" style="line-height:1.7">Summarize, draft, organize and connect ideas across your entire workspace. Your second brain.</p>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <div class="icon-box mb-5">⚡</div>
+        <h3 style="font-size:22px; font-weight:700; margin-bottom:10px;">Real-time Collaboration</h3>
+        <p class="muted" style="line-height:1.7">See edits live, comment, assign tasks, share spaces. Your whole team, in one place.</p>
+      </div>
+      <div class="card rounded-2xl p-8">
+        <div class="icon-box mb-5">🔒</div>
+        <h3 style="font-size:22px; font-weight:700; margin-bottom:10px;">Your Data, Your Control</h3>
+        <p class="muted" style="line-height:1.7">Privacy-first by design. Export everything anytime. Control what AI can access.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider mx-6"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto reveal">
+    <div class="text-center mb-14">
+      <div class="pill mx-auto mb-5" style="width:fit-content">Process</div>
+      <h2 class="text-4xl md:text-5xl font-extrabold">Get started in <span class="gradient-text">60 seconds</span></h2>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="card rounded-2xl p-7 flex gap-6 items-start">
+        <div class="step-num">1</div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; margin-bottom:8px;">Create your Merge ID</h3>
+          <p class="muted" style="line-height:1.7">Email, Google, or Apple. One identity, infinite workspaces.</p>
+        </div>
+      </div>
+      <div class="card rounded-2xl p-7 flex gap-6 items-start">
+        <div class="step-num">2</div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; margin-bottom:8px;">Import or start fresh</h3>
+          <p class="muted" style="line-height:1.7">Bring notes from anywhere — Merge AI helps organize and link them.</p>
+        </div>
+      </div>
+      <div class="card rounded-2xl p-7 flex gap-6 items-start">
+        <div class="step-num">3</div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; margin-bottom:8px;">Collaborate & grow</h3>
+          <p class="muted" style="line-height:1.7">Invite teammates, set goals, and ship faster together.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto reveal">
+    <div class="text-center mb-14">
+      <div class="pill mx-auto mb-5" style="width:fit-content">Pricing</div>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Simple, <span class="gradient-text">transparent</span> pricing</h2>
+      <p class="muted" style="font-weight:300">Start free. Upgrade when you're ready.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="card rounded-2xl p-8 flex flex-col">
+        <h3 style="font-size:20px; font-weight:700; margin-bottom:4px;">Starter</h3>
+        <p class="muted mb-6" style="font-size:13px">Perfect to explore</p>
+        <div style="font-family:'Syne',sans-serif; font-size:40px; font-weight:800; margin-bottom:24px">$0<span style="font-size:16px; color:var(--muted)">/mo</span></div>
+        <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:32px; flex:1">
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> 1 workspace</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> 5 GB storage</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Basic AI (10/mo)</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Up to 3 collaborators</li>
+        </ul>
+        <button onclick="openWaitlistModal()" class="btn-outline w-full py-3 rounded-xl" style="font-size:14px">Get Started</button>
+      </div>
+
+      <div class="pricing-popular-wrap flex flex-col">
+        <div class="pricing-popular-inner p-8 flex flex-col flex-1 relative">
+          <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#fbbf24; color:#000; padding:4px 14px; border-radius:100px; font-size:11px; font-family:'Syne',sans-serif; font-weight:800; letter-spacing:.06em; white-space:nowrap">MOST POPULAR</div>
+          <h3 style="font-size:20px; font-weight:700; margin-bottom:4px;">Pro</h3>
+          <p class="muted mb-6" style="font-size:13px">For serious builders</p>
+          <div class="gradient-text" style="font-family:'Syne',sans-serif; font-size:40px; font-weight:800; margin-bottom:24px">$12<span style="font-size:16px; color:var(--muted)">/mo</span></div>
+          <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:32px; flex:1">
+            <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Unlimited workspaces</li>
+            <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> 100 GB storage</li>
+            <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Unlimited AI requests</li>
+            <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Unlimited collaborators</li>
+            <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Priority support</li>
+          </ul>
+          <button onclick="openWaitlistModal()" class="btn-brand w-full py-3 rounded-xl" style="font-size:14px">Start Free Trial</button>
+        </div>
+      </div>
+
+      <div class="card rounded-2xl p-8 flex flex-col">
+        <h3 style="font-size:20px; font-weight:700; margin-bottom:4px;">Team</h3>
+        <p class="muted mb-6" style="font-size:13px">For growing companies</p>
+        <div style="font-family:'Syne',sans-serif; font-size:40px; font-weight:800; margin-bottom:24px">$10<span style="font-size:16px; color:var(--muted)">/user</span></div>
+        <ul style="display:flex; flex-direction:column; gap:12px; margin-bottom:32px; flex:1">
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Everything in Pro</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Centralized billing</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> Admin controls</li>
+          <li style="font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center"><span style="color:var(--cyan)">✓</span> SSO integration</li>
+        </ul>
+        <button onclick="openWaitlistModal()" class="btn-outline w-full py-3 rounded-xl" style="font-size:14px">Contact Sales</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider mx-6"></div>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto reveal text-center">
+    <div class="pill mx-auto mb-5" style="width:fit-content">Social Proof</div>
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-14">Loved by creators &amp; teams<br><span class="gradient-text">worldwide</span></h2>
+    <div class="grid md:grid-cols-3 gap-6 text-left">
+      <div class="card rounded-2xl p-7">
+        <div class="stars mb-3" style="font-size:18px">★★★★★</div>
+        <p style="font-size:15px; line-height:1.75; color:rgba(240,244,255,.75); margin-bottom:20px; font-style:italic">"Finally, I can stop juggling 15 apps. Merge is a game-changer for my focus."</p>
+        <div style="display:flex; align-items:center; gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7b2fff,#00e5ff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">S</div>
+          <div><p style="font-weight:600; font-size:14px;">Sarah Chen</p><p style="font-size:12px; color:var(--muted)">Product Designer</p></div>
+        </div>
+      </div>
+      <div class="card rounded-2xl p-7">
+        <div class="stars mb-3" style="font-size:18px">★★★★★</div>
+        <p style="font-size:15px; line-height:1.75; color:rgba(240,244,255,.75); margin-bottom:20px; font-style:italic">"The AI features alone are worth it. Summaries + drafts save me hours every week."</p>
+        <div style="display:flex; align-items:center; gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#00bcd4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">M</div>
+          <div><p style="font-weight:600; font-size:14px;">Marcus Rodriguez</p><p style="font-size:12px; color:var(--muted)">Creator</p></div>
+        </div>
+      </div>
+      <div class="card rounded-2xl p-7">
+        <div class="stars mb-3" style="font-size:18px">★★★★★</div>
+        <p style="font-size:15px; line-height:1.75; color:rgba(240,244,255,.75); margin-bottom:20px; font-style:italic">"Our team's collaboration doubled after switching to Merge. Can't imagine going back."</p>
+        <div style="display:flex; align-items:center; gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e040fb,#7b2fff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">A</div>
+          <div><p style="font-weight:600; font-size:14px;">Alex Kim</p><p style="font-size:12px; color:var(--muted)">Founder</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (WITH ALL ANSWERS) -->
+<section id="faq" class="py-24 px-6">
+  <div class="max-w-3xl mx-auto reveal">
+    <div class="text-center mb-14">
+      <div class="pill mx-auto mb-5" style="width:fit-content">FAQ</div>
+      <h2 class="text-4xl md:text-5xl font-extrabold">Frequently asked <span class="gradient-text">questions</span></h2>
+    </div>
+
+    <div id="faq-accordion" style="display:flex; flex-direction:column; gap:12px">
+
+      <div class="faq-item card rounded-xl overflow-hidden">
+        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+          <span>Is there a free trial for the Pro plan?</span>
+          <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="answer">
+          <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
+            Yes — Pro includes a 14-day trial. No card required. You can downgrade to Starter anytime.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item card rounded-xl overflow-hidden">
+        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+          <span>What happens to my data if I cancel?</span>
+          <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="answer">
+          <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
+            Your content is always yours. You can export your workspace any time. If you cancel, your account stays active until the end of your billing period.
+            After that we keep your data during a short grace window so you can restore. When that window ends, your data is scheduled for deletion.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item card rounded-xl overflow-hidden">
+        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+          <span>How does the AI assistant work?</span>
+          <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="answer">
+          <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
+            Merge AI is workspace-aware: it summarizes, drafts, and organizes across your notes, tasks, and docs inside a workspace you control.
+            You choose what it can access per workspace. It’s designed to help you move faster without turning your data into training material.
+            We do not train models on your private workspace content.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item card rounded-xl overflow-hidden">
+        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+          <span>Can I integrate Merge with other apps?</span>
+          <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="answer">
+          <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
+            Yes — integrations are on the roadmap. The first wave includes Google Calendar, Slack, Notion import, and a public API + webhooks for automations.
+            Beta will start with high-impact connectors and expand into deeper two-way sync.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item card rounded-xl overflow-hidden">
+        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+          <span>Does the waitlist actually save my email?</span>
+          <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="answer">
+          <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
+            Yes. The waitlist form submits to your Google Form endpoint in the background (hidden iframe), so the page never redirects.
+            If the submission succeeds, you’ll see the success state and the waitlist counter will increment. To verify, open the Google Sheet connected to the form and confirm the new row was added.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="py-24 px-6">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <div style="position:relative; overflow:hidden; background:linear-gradient(135deg, rgba(123,47,255,.15), rgba(0,229,255,.08)); border:1px solid var(--border); border-radius:28px; padding:72px 40px">
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:300px; background:radial-gradient(ellipse, rgba(123,47,255,.2) 0%, transparent 70%); pointer-events:none"></div>
+      <div class="relative" style="z-index:1">
+        <h2 class="text-5xl font-extrabold mb-5 leading-tight">Ready to <span class="gradient-text">merge</span><br>your digital life?</h2>
+        <p class="muted text-xl mb-10" style="font-weight:300">Join thousands who already made the switch.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="openWaitlistModal()" class="btn-brand px-8 py-4 rounded-2xl" style="font-size:16px">Join Waitlist — It's Free ✦</button>
+          <button onclick="openDemoModal()" class="btn-outline px-8 py-4 rounded-2xl" style="font-size:15px">Watch Demo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--border); padding: 60px 24px 40px">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px">
+          <div class="logo-badge logo-badge--sm"><span class="logo-badge__m" style="font-size:15px">M</span></div>
+          <span class="wordmark" style="font-size:18px">Merge<span class="gradient-text">.AI</span></span>
+        </div>
+        <p class="muted" style="font-size:13px; line-height:1.6">Everything. Together.</p>
+      </div>
+
+      <div>
+        <h4 style="font-weight:700; font-size:14px; margin-bottom:16px; letter-spacing:.04em; text-transform:uppercase">Product</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('roadmap')">Roadmap</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('changelog')">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-weight:700; font-size:14px; margin-bottom:16px; letter-spacing:.04em; text-transform:uppercase">Company</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none">
+          <li><a href="javascript:void(0)" onclick="openFooterModal('about')">About</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('blog')">Blog</a></li>
+          <li><a href="./careers.html">Careers</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('contact')">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-weight:700; font-size:14px; margin-bottom:16px; letter-spacing:.04em; text-transform:uppercase">Legal</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px; list-style:none">
+          <li><a href="javascript:void(0)" onclick="openFooterModal('privacy')">Privacy</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('terms')">Terms</a></li>
+          <li><a href="javascript:void(0)" onclick="openFooterModal('security')">Security</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px">
+      <p style="font-size:13px; color:var(--muted)">© 2026 Merge.AI, Inc. All rights reserved.</p>
+      <p style="font-size:13px; color:var(--muted)">Made with ♥ across the globe</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WAITLIST MODAL -->
+<div id="waitlistModal" class="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div style="padding:32px 36px 28px; border-bottom:1px solid var(--border); position:relative">
+      <button onclick="closeWaitlistModal()" style="position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s">✕</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <div class="logo-badge"><span class="logo-badge__m">M</span></div>
+        <span class="wordmark" style="font-size:18px">Merge<span class="gradient-text">.AI</span></span>
+      </div>
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:6px">Join the Waitlist</h2>
+      <p class="muted" style="font-size:14px">Be the first to know when Merge launches. Get exclusive early features.</p>
+    </div>
+
+    <!-- Hidden iframe keeps you on the same page -->
+    <iframe name="hidden_iframe" style="display:none"></iframe>
+
+    <!-- Form view -->
+    <div id="waitlist-modal-content" style="padding:28px 36px">
+      <form
+        id="modal-waitlist-form"
+        class="flex flex-col gap-3"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSdcwGOk8pPO7CBar9XoED944JEBrhdRrCZdnMWOWcXIVCVPhQ/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        onsubmit="return submitWaitlist()"
+      >
+        <input
+          type="email"
+          name="entry.273801007"
+          placeholder="your@email.com"
+          required
+          class="field"
+        />
+        <button type="submit" class="btn-brand py-3 rounded-xl w-full" style="font-size:15px">
+          Get Early Access ✦
+        </button>
+        <p style="font-size:12px; color:var(--muted); text-align:center; margin-top:4px">
+          No spam. Just launch updates.
+        </p>
+      </form>
+    </div>
+
+    <!-- Success view -->
+    <div id="waitlist-modal-success" style="display:none; padding:40px 36px; text-align:center">
+      <div id="confetti-zone" style="position:relative;height:40px;margin-bottom:8px;overflow:visible"></div>
+      <div style="width:68px;height:68px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;box-shadow:var(--glow-p)">✓</div>
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">You're on the list! 🚀</h3>
+      <p class="muted" style="font-size:14px;line-height:1.7;margin-bottom:24px">
+        Thanks — we'll email you the moment Merge is ready.
+      </p>
+      <button onclick="closeWaitlistModal(true)" class="btn-brand px-8 py-3 rounded-xl" style="font-size:14px">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO MODAL (REAL SECTION, NOT ALERT) -->
+<div id="demoModal" class="modal-overlay" onclick="closeDemoOutside(event)">
+  <div class="modal-box" style="max-width:720px">
+    <div style="padding:28px 32px; border-bottom:1px solid var(--border); position:relative">
+      <button onclick="closeDemoModal()" style="position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+      <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px">Merge.AI Demo</h2>
+      <p class="muted" style="font-size:13px">Drop your real video link later. This is already wired and working.</p>
+    </div>
+
+    <div style="padding:22px 32px 30px">
+      <div id="demoContainer" class="demo-frame">
+        <!-- Default placeholder -->
+        Demo video placeholder (16:9). Replace with your YouTube/Vimeo embed URL in the script block.
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px">
+        <button class="btn-brand px-5 py-2.5 rounded-xl" onclick="loadDemo('placeholder')" style="font-size:14px">Overview</button>
+        <button class="btn-outline px-5 py-2.5 rounded-xl" onclick="loadDemo('ai')" style="font-size:14px">AI Summaries</button>
+        <button class="btn-outline px-5 py-2.5 rounded-xl" onclick="loadDemo('collab')" style="font-size:14px">Collaboration</button>
+      </div>
+
+      <p class="muted" style="font-size:12px; margin-top:12px">
+        Tip: When you have your real demo link, set <code style="color:rgba(240,244,255,.8)">DEMO_URLS</code> in the script section.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER MODAL -->
+<div id="footerModal" class="modal-overlay" onclick="closeFooterModalOutside(event)">
+  <div class="modal-box" style="max-width:520px">
+    <div style="padding:28px 32px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:#0d1235; z-index:1;">
+      <h2 id="footerModalTitle" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700"></h2>
+      <button onclick="closeFooterModal()" style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:16px;">✕</button>
+    </div>
+    <div id="footerModalBody" style="padding:28px 32px; font-size:14px; line-height:1.8; color:rgba(240,244,255,.72)"></div>
+  </div>
+</div>
+
+<script>
+/* -----------------------
+WAITLIST MODAL
+----------------------- */
+function openWaitlistModal() {
+  const m = document.getElementById('waitlistModal');
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeWaitlistModal(reset=false) {
+  document.getElementById('waitlistModal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (reset) resetWaitlistModal();
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('waitlistModal')) closeWaitlistModal(true);
+}
+function resetWaitlistModal(){
+  document.getElementById('waitlist-modal-content').style.display = 'block';
+  document.getElementById('waitlist-modal-success').style.display = 'none';
+  const form = document.getElementById('modal-waitlist-form');
+  if (form) form.reset();
+}
+
+/* Submit to Google Forms (hidden iframe) */
+function submitWaitlist() {
+  setTimeout(() => {
+    document.getElementById('waitlist-modal-content').style.display = 'none';
+    document.getElementById('waitlist-modal-success').style.display = 'block';
+    spawnConfetti();
+
+    const el = document.getElementById('waitlist-count');
+    const n = parseInt(el.textContent.replace(/,/g,'')) + 1;
+    el.textContent = n.toLocaleString();
+  }, 450);
+
+  return true; // allow submit to Google
+}
+
+function spawnConfetti() {
+  const zone = document.getElementById('confetti-zone');
+  zone.innerHTML = '';
+  const colors = ['#7b2fff','#00e5ff','#a855f7','#e040fb','#00bcd4','#fbbf24'];
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `
+      position:absolute;
+      width:${6+Math.random()*6}px;
+      height:${6+Math.random()*6}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      left:${10+Math.random()*80}%;
+      top:0;
+      animation-delay:${Math.random()*.4}s;
+    `;
+    zone.appendChild(p);
+    setTimeout(() => p.remove(), 2200);
+  }
+}
+
+/* -----------------------
+DEMO MODAL (WORKING)
+----------------------- */
+const DEMO_URLS = {
+  // Replace these with real embed URLs when you have them:
+  placeholder: null,
+  ai: null,
+  collab: null
+};
+
+function openDemoModal() {
+  document.getElementById('demoModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadDemo('placeholder');
+}
+function closeDemoModal() {
+  document.getElementById('demoModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeDemoOutside(e) {
+  if (e.target === document.getElementById('demoModal')) closeDemoModal();
+}
+
+function loadDemo(key) {
+  const container = document.getElementById('demoContainer');
+  const url = DEMO_URLS[key];
+
+  if (!url) {
+    const labels = {
+      placeholder: "Overview demo",
+      ai: "AI Summaries demo",
+      collab: "Collaboration demo"
+    };
+    container.innerHTML = `
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;margin-bottom:8px">🎬 ${labels[key] || "Demo"}</div>
+        <div style="color:rgba(240,244,255,.7);line-height:1.6">
+          Replace <strong>DEMO_URLS.${key}</strong> with your YouTube/Vimeo embed URL and this will become a real video instantly.
+          <br><br>
+          Example YouTube embed:
+          <span style="color:rgba(240,244,255,.85)">https://www.youtube.com/embed/VIDEO_ID</span>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <iframe
+      width="100%"
+      height="100%"
+      style="border:0;border-radius:14px"
+      src="${url}"
+      title="Merge.AI Demo"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  `;
+}
+
+/* -----------------------
+FOOTER MODAL CONTENT
+----------------------- */
+const FOOTER_CONTENT = {
+  roadmap:   { title: 'Product Roadmap', body: `<p style="margin-bottom:14px">Here’s what we’re building next:</p><ul style="list-style:none;display:flex;flex-direction:column;gap:12px"><li><span style="color:var(--cyan)">Beta</span> — AI summaries, search, exports</li><li><span style="color:var(--cyan)">Next</span> — Calendar integration & scheduling</li><li><span style="color:var(--violet)">Soon</span> — Slack + Notion import pipelines</li><li><span style="color:var(--violet)">Later</span> — Public API + webhooks</li><li><span style="color:var(--muted)">Enterprise</span> — SSO, audit logs, compliance</li></ul>` },
+  changelog: { title: 'Changelog', body: `<p style="color:var(--muted);margin-bottom:16px">Recent updates:</p><div style="display:flex;flex-direction:column;gap:14px"><div><p style="font-weight:700;color:var(--white);font-size:13px;margin-bottom:4px">v0.4.0</p><p>Faster summaries, better context linking, improved waitlist UX.</p></div><div><p style="font-weight:700;color:var(--white);font-size:13px;margin-bottom:4px">v0.3.2</p><p>Collaboration beta and improved file organization UI.</p></div></div>` },
+  about:     { title: 'About Merge.AI', body: `<p style="margin-bottom:14px">Merge.AI is built to end tool fragmentation for modern work. One workspace for notes, tasks, files, and AI assistance — designed to keep you in flow.</p><p>Privacy-first, fast, and intentionally simple.</p>` },
+  blog:      { title: 'Blog', body: `<p style="color:var(--muted)">Blog launches at beta. Join the waitlist for updates.</p>` },
+  contact:   { title: 'Contact Us', body: `<ul style="list-style:none;display:flex;flex-direction:column;gap:10px"><li>📧 <a href="mailto:hello@merge.ai" style="color:var(--cyan);font-weight:600">hello@merge.ai</a></li><li>🛠️ <a href="mailto:support@merge.ai" style="color:var(--cyan);font-weight:600">support@merge.ai</a></li></ul>` },
+  privacy:   { title: 'Privacy Policy', body: `<ul style="list-style:none;display:flex;flex-direction:column;gap:10px"><li><span style="color:var(--cyan)">✓</span> We don’t sell your data</li><li><span style="color:var(--cyan)">✓</span> We don’t train on your private content</li><li><span style="color:var(--cyan)">✓</span> Export/delete anytime</li></ul>` },
+  terms:     { title: 'Terms of Service', body: `<p>Use Merge.AI for lawful purposes. You own your content. Pricing may change with notice during beta.</p>` },
+  security:  { title: 'Security', body: `<ul style="list-style:none;display:flex;flex-direction:column;gap:10px"><li>🔒 Encryption in transit and at rest</li><li>🔒 Least privilege access controls</li><li>🔒 Ongoing security hardening</li></ul>` },
+};
+
+function openFooterModal(key) {
+  const data = FOOTER_CONTENT[key];
+  if (!data) return;
+  document.getElementById('footerModalTitle').textContent = data.title;
+  document.getElementById('footerModalBody').innerHTML = data.body;
+  document.getElementById('footerModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeFooterModal() {
+  document.getElementById('footerModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeFooterModalOutside(e) {
+  if (e.target === document.getElementById('footerModal')) closeFooterModal();
+}
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item .question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* Scroll reveal */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
