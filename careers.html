@@ -1,0 +1,988 @@
+<!-- ===========================
+FILE: careers.html
+Put this in your repo root as: careers.html
+=========================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merge.AI — Careers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #050816;
+    --navy: #0a0f2e;
+    --purple: #7b2fff;
+    --violet: #a855f7;
+    --pink: #e040fb;
+    --cyan: #00e5ff;
+    --teal: #00bcd4;
+    --white: #f0f4ff;
+    --muted: #8892b0;
+    --card-bg: rgba(255,255,255,0.03);
+    --border: rgba(124,47,255,0.2);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 8%, rgba(200,180,255,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 70% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 30%, rgba(180,230,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 30% 70%, rgba(200,180,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 65%, rgba(180,230,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 50% 40%, rgba(120,100,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 88%, rgba(200,180,255,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(5,8,22,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, #7b2fff, #00e5ff);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:#fff;
+    box-shadow: 0 0 20px rgba(123,47,255,0.5);
+  }
+  .logo-text { font-family:'Syne',sans-serif; font-weight:700; font-size:20px; color:var(--white); }
+  .logo-text span { color: var(--cyan); }
+  nav ul { list-style:none; display:flex; gap:36px; }
+  nav ul a { color: var(--muted); text-decoration:none; font-size:14px; font-weight:500; transition: color 0.2s; }
+  nav ul a:hover { color: var(--white); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 700 !important;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 160px 60px 90px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(123,47,255,0.25) 0%, rgba(0,229,255,0.1) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 6px 16px;
+    border: 1px solid rgba(0,229,255,0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    background: rgba(0,229,255,0.06);
+  }
+  .badge-dot { width:6px; height:6px; background:var(--cyan); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1);} 50% { opacity:.55; transform:scale(1.3);} }
+
+  .hero h1 {
+    font-family:'Syne',sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 60%, var(--teal) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .hero-stats { display:flex; justify-content:center; gap:50px; flex-wrap:wrap; }
+  .stat-num {
+    font-family:'Syne',sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+
+  .filter-section {
+    position: relative;
+    z-index: 1;
+    padding: 0 60px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .filter-bar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom: 30px; }
+  .search-wrap { flex:1; min-width:260px; position:relative; }
+  .search-wrap svg { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--muted); }
+  .search-input {
+    width:100%;
+    padding: 14px 16px 14px 48px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--white);
+    font-size: 14px;
+    outline: none;
+  }
+  .search-input::placeholder { color: var(--muted); }
+  .filter-select {
+    padding: 14px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--white);
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238892b0' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  .filter-select option { background: #0a0f2e; }
+
+  .filter-chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 22px; }
+  .chip {
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+  }
+  .chip.active {
+    background: linear-gradient(135deg, rgba(123,47,255,0.3), rgba(0,229,255,0.15));
+    border-color: var(--purple);
+    color: var(--white);
+  }
+
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+  }
+  .job-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    cursor: pointer;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+  .job-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(123,47,255,0.5);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(123,47,255,0.15);
+  }
+  .job-card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px; }
+  .dept-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .dept-engineering { background: rgba(123,47,255,0.2); }
+  .dept-design { background: rgba(0,229,255,0.15); }
+  .dept-product { background: rgba(168,85,247,0.2); }
+  .dept-marketing { background: rgba(224,64,251,0.15); }
+  .dept-data { background: rgba(0,188,212,0.2); }
+  .dept-operations { background: rgba(255,167,38,0.15); }
+
+  .job-badges { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .badge { padding: 3px 10px; border-radius:100px; font-size:11px; font-weight:800; letter-spacing:0.04em; }
+  .badge-new { background: rgba(0,229,255,0.15); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
+  .badge-remote { background: rgba(168,85,247,0.15); color: var(--violet); border: 1px solid rgba(168,85,247,0.3); }
+  .badge-hybrid { background: rgba(224,64,251,0.12); color: var(--pink); border: 1px solid rgba(224,64,251,0.25); }
+  .badge-onsite { background: rgba(255,167,38,0.12); color: #ffa726; border: 1px solid rgba(255,167,38,0.25); }
+  .badge-hot { background: rgba(255,87,34,0.15); color: #ff7043; border: 1px solid rgba(255,87,34,0.3); }
+
+  .job-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; margin-bottom:8px; line-height:1.3; }
+  .job-dept { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .job-meta { display:flex; gap:16px; font-size:12px; color: var(--muted); margin-bottom: 18px; flex-wrap:wrap; }
+  .job-salary {
+    font-family:'Syne',sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    margin-bottom: 18px;
+  }
+  .job-card-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .apply-btn {
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .posted-date { font-size: 11px; color: var(--muted); }
+
+  .glow-divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--purple), transparent);
+    opacity: 0.3;
+    margin: 10px 0 30px;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 70px 20px;
+    color: var(--muted);
+    grid-column: 1 / -1;
+  }
+  .no-results .icon { font-size: 48px; margin-bottom: 16px; }
+  .no-results h3 { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color: var(--white); margin-bottom: 8px; }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,22,0.85);
+    backdrop-filter: blur(12px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: #0d1235;
+    border: 1px solid rgba(123,47,255,0.3);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+  .modal-header {
+    padding: 28px 30px 20px;
+    border-bottom: 1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:flex-start;
+    position: sticky;
+    top: 0;
+    background: #0d1235;
+    z-index: 1;
+    gap: 16px;
+  }
+  .modal-title-group h2 { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom: 6px; }
+  .modal-title-group p { font-size:14px; color: var(--muted); }
+  .close-btn {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .modal-body { padding: 22px 30px 28px; }
+  .modal-section { margin-bottom: 22px; }
+  .modal-section h3 {
+    font-family:'Syne',sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .modal-section p, .modal-section li { font-size: 14px; color: rgba(240,244,255,0.78); line-height: 1.75; }
+  .modal-section ul { padding-left: 18px; }
+  .modal-section li { margin-bottom: 6px; }
+
+  /* Application form */
+  .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display:flex; flex-direction:column; gap:8px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--white);
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(136,146,176,0.55); }
+  .form-group select option { background: #0a0f2e; }
+
+  .file-upload {
+    border: 2px dashed rgba(123,47,255,0.3) !important;
+    text-align: center;
+    padding: 18px !important;
+    cursor: pointer;
+    color: var(--muted) !important;
+    font-size: 13px !important;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .success-state { text-align:center; padding: 34px 10px; }
+  .success-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 32px;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 40px rgba(123,47,255,0.4);
+  }
+  .success-state h3 { font-family:'Syne',sans-serif; font-size:22px; font-weight:900; margin-bottom: 10px; }
+  .success-state p { color: var(--muted); font-size: 14px; line-height:1.7; max-width: 420px; margin: 0 auto 18px; }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--cyan); text-decoration: none; font-weight: 700; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    nav ul { display: none; }
+    .hero { padding: 120px 22px 70px; }
+    .filter-section { padding: 0 22px 50px; }
+    .jobs-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    .modal-header { padding: 22px; }
+    .modal-body { padding: 18px 22px 22px; }
+    footer { padding: 30px 22px; }
+  }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./index.html" class="logo">
+    <div class="logo-icon">M</div>
+    <span class="logo-text">Merge<span>.AI</span></span>
+  </a>
+  <ul>
+    <li><a href="./index.html">Home</a></li>
+    <li><a href="#jobs">Open Roles</a></li>
+    <li><a href="#perks">Benefits</a></li>
+    <li><a href="./index.html#pricing">Pricing</a></li>
+    <li><a href="./index.html#faq" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    We're hiring — <span id="openCount">8</span> open roles
+  </div>
+  <h1>Build the future of<br><span class="gradient-text">intelligent merging</span></h1>
+  <p>
+    Join a remote-first team building a unified AI workspace. Move fast, ship real things,
+    and help people stop juggling tools.
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">140+</div>
+      <div class="stat-label">Team Members</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">28</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Series A</div>
+      <div class="stat-label">Backed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Glassdoor</div>
+    </div>
+  </div>
+</section>
+
+<section class="filter-section" id="jobs">
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search roles, skills, keywords…" oninput="filterJobs()">
+    </div>
+    <select class="filter-select" id="deptFilter" onchange="filterJobs()">
+      <option value="">All Departments</option>
+      <option>Engineering</option>
+      <option>Design</option>
+      <option>Product</option>
+      <option>Data & AI</option>
+      <option>Marketing</option>
+      <option>Operations</option>
+    </select>
+    <select class="filter-select" id="locationFilter" onchange="filterJobs()">
+      <option value="">All Locations</option>
+      <option>Remote</option>
+      <option>Hybrid</option>
+      <option>On-site</option>
+    </select>
+  </div>
+
+  <div class="filter-chips" id="levelChips">
+    <button class="chip active" onclick="setLevel('', this)">All Levels</button>
+    <button class="chip" onclick="setLevel('Senior', this)">Senior</button>
+    <button class="chip" onclick="setLevel('Mid', this)">Mid-Level</button>
+    <button class="chip" onclick="setLevel('Lead', this)">Lead</button>
+    <button class="chip" onclick="setLevel('Staff', this)">Staff</button>
+    <button class="chip" onclick="setLevel('Principal', this)">Principal</button>
+  </div>
+
+  <div class="jobs-grid" id="jobsGrid"></div>
+</section>
+
+<div class="glow-divider"></div>
+
+<section class="filter-section" id="perks" style="padding-top:10px">
+  <div style="text-align:center; margin-bottom:28px">
+    <h2 style="font-family:'Syne',sans-serif; font-size: clamp(26px, 3vw, 40px); font-weight:900; margin-bottom: 10px;">
+      Why <span class="gradient-text">Merge.AI</span>?
+    </h2>
+    <p style="color:var(--muted); font-weight:300;">We invest in our people as much as our technology.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+    <div class="job-card" style="cursor:default">
+      <div style="font-size:26px;margin-bottom:10px">🌍</div>
+      <div class="job-title" style="margin-bottom:6px">Remote-First</div>
+      <div class="job-dept">Work from anywhere. Async culture + meaningful overlap.</div>
+    </div>
+    <div class="job-card" style="cursor:default">
+      <div style="font-size:26px;margin-bottom:10px">💰</div>
+      <div class="job-title" style="margin-bottom:6px">Competitive Comp</div>
+      <div class="job-dept">Top-of-market salaries + meaningful equity.</div>
+    </div>
+    <div class="job-card" style="cursor:default">
+      <div style="font-size:26px;margin-bottom:10px">🧠</div>
+      <div class="job-title" style="margin-bottom:6px">Learning Budget</div>
+      <div class="job-dept">$3,000/year for courses, conferences, and books.</div>
+    </div>
+    <div class="job-card" style="cursor:default">
+      <div style="font-size:26px;margin-bottom:10px">🏥</div>
+      <div class="job-title" style="margin-bottom:6px">Health Coverage</div>
+      <div class="job-dept">Medical, dental, vision + mental health support.</div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title-group">
+        <h2 id="modalJobTitle">Job Title</h2>
+        <p id="modalJobMeta">Department · Location · Type</p>
+      </div>
+      <button class="close-btn" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Merge.AI, Inc. · <a href="./index.html">Back to Home</a> · Equal Opportunity Employer</p>
+</footer>
+
+<script>
+const JOBS = [
+  {
+    id: 1,
+    title: "Staff ML Engineer — Foundation Models",
+    dept: "Engineering",
+    icon: "⚡",
+    iconClass: "dept-engineering",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$220,000 – $310,000 + equity",
+    level: "Staff",
+    posted: "2 days ago",
+    badges: [{cls:"badge-new", label:"New"}, {cls:"badge-remote", label:"Remote"}],
+    isHot: true,
+    description: "Lead the development of our foundation model stack — training infra, evaluation, and efficient inference for real product use.",
+    responsibilities: [
+      "Design large-scale training infrastructure for multi-billion parameter models",
+      "Build evaluation frameworks (quality, safety, reliability)",
+      "Drive model efficiency: distillation, quantization, caching",
+      "Partner with product to ship model improvements that matter",
+      "Mentor engineers and raise the bar across the org"
+    ],
+    requirements: [
+      "7+ years ML engineering experience (3+ years at scale)",
+      "Expertise with PyTorch/JAX and distributed training",
+      "Strong systems skills (GPU compute, memory, throughput)",
+      "Experience shipping ML into production products",
+      "Excellent communication and ownership"
+    ]
+  },
+  {
+    id: 2,
+    title: "Senior Product Designer — AI Interfaces",
+    dept: "Design",
+    icon: "✦",
+    iconClass: "dept-design",
+    location: "Hybrid",
+    type: "Full-time",
+    salary: "$160,000 – $210,000 + equity",
+    level: "Senior",
+    posted: "5 days ago",
+    badges: [{cls:"badge-hybrid", label:"Hybrid"}],
+    isHot: false,
+    description: "Define how humans interact with intelligent systems — from assistant experiences to real-time dashboards and workflow UI.",
+    responsibilities: [
+      "Own end-to-end design for core AI surfaces",
+      "Build scalable patterns + a component system",
+      "Partner with engineering in a true 0-to-1 environment",
+      "Run research, synthesize insights, and iterate quickly",
+      "Champion accessibility and inclusive design"
+    ],
+    requirements: [
+      "5+ years product design, 2+ years AI/ML products",
+      "Strong Figma and design systems experience",
+      "Portfolio demonstrating systems thinking",
+      "Comfort working with engineers and constraints",
+      "Clear storytelling and rationale"
+    ]
+  },
+  {
+    id: 3,
+    title: "Principal Data Scientist — Recommendations",
+    dept: "Data & AI",
+    icon: "◈",
+    iconClass: "dept-data",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$195,000 – $265,000 + equity",
+    level: "Principal",
+    posted: "1 week ago",
+    badges: [{cls:"badge-remote", label:"Remote"}],
+    isHot: true,
+    description: "Lead personalization strategy and ship models that understand intent across workspace content and user workflows.",
+    responsibilities: [
+      "Define recommendation roadmap and metrics",
+      "Build + ship production models at scale",
+      "Design real-time feature pipelines",
+      "Mentor a team of senior data scientists",
+      "Share learnings internally and externally"
+    ],
+    requirements: [
+      "8+ years DS/ML experience",
+      "Strong recsys knowledge (ranking, retrieval, embeddings)",
+      "Python + distributed compute experience",
+      "Track record of shipping models",
+      "Strong cross-functional collaboration"
+    ]
+  },
+  {
+    id: 4,
+    title: "Senior Software Engineer — Platform Infra",
+    dept: "Engineering",
+    icon: "⚡",
+    iconClass: "dept-engineering",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$185,000 – $245,000 + equity",
+    level: "Senior",
+    posted: "3 days ago",
+    badges: [{cls:"badge-new", label:"New"}, {cls:"badge-remote", label:"Remote"}],
+    isHot: false,
+    description: "Build the infrastructure that powers Merge.AI — reliability, observability, and secure multi-service delivery.",
+    responsibilities: [
+      "Operate Kubernetes-based infrastructure",
+      "Improve observability (metrics, traces, logs)",
+      "Build internal platforms to accelerate delivery",
+      "Drive SRE practices: SLOs, incident response",
+      "Mentor engineers on infra best practices"
+    ],
+    requirements: [
+      "5+ years platform/infrastructure engineering",
+      "Kubernetes + cloud experience (AWS/GCP/Azure)",
+      "Go/Python/Rust experience",
+      "Distributed systems experience",
+      "Security-first mindset"
+    ]
+  },
+  {
+    id: 5,
+    title: "Product Manager — Developer Experience",
+    dept: "Product",
+    icon: "◉",
+    iconClass: "dept-product",
+    location: "Hybrid",
+    type: "Full-time",
+    salary: "$170,000 – $220,000 + equity",
+    level: "Mid",
+    posted: "1 week ago",
+    badges: [{cls:"badge-hybrid", label:"Hybrid"}],
+    isHot: false,
+    description: "Own DX for APIs, SDKs, documentation, and onboarding. Help developers build automations on top of Merge.AI.",
+    responsibilities: [
+      "Define developer platform roadmap",
+      "Gather feedback and synthesize insights",
+      "Partner with eng on API quality and docs",
+      "Drive adoption and activation metrics",
+      "Represent developer needs at company level"
+    ],
+    requirements: [
+      "4+ years PM experience, 2+ in dev tools/APIs",
+      "Strong technical intuition",
+      "Excellent stakeholder management",
+      "Data-driven prioritization",
+      "Clear written communication"
+    ]
+  },
+  {
+    id: 6,
+    title: "Lead Growth Marketing Manager",
+    dept: "Marketing",
+    icon: "★",
+    iconClass: "dept-marketing",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$145,000 – $190,000 + equity",
+    level: "Lead",
+    posted: "4 days ago",
+    badges: [{cls:"badge-new", label:"New"}, {cls:"badge-remote", label:"Remote"}],
+    isHot: false,
+    description: "Own acquisition and retention experiments across the full funnel. Scale what works — fast.",
+    responsibilities: [
+      "Run growth experiments and measure impact",
+      "Own content and community strategy",
+      "Partner with sales on ABM for enterprise",
+      "Manage analytics and attribution",
+      "Build a small high-output team"
+    ],
+    requirements: [
+      "6+ years B2B SaaS growth marketing",
+      "Strong analytics and experimentation",
+      "Great storytelling and positioning",
+      "Ability to execute and iterate quickly",
+      "AI/dev-tools background is a plus"
+    ]
+  },
+  {
+    id: 7,
+    title: "Senior Security Engineer",
+    dept: "Engineering",
+    icon: "🛡️",
+    iconClass: "dept-engineering",
+    location: "On-site",
+    type: "Full-time",
+    salary: "$190,000 – $250,000 + equity",
+    level: "Senior",
+    posted: "2 weeks ago",
+    badges: [{cls:"badge-onsite", label:"On-site"}],
+    isHot: false,
+    description: "Protect platform, data, and AI systems. Own security architecture and incident readiness.",
+    responsibilities: [
+      "Lead cloud security architecture and controls",
+      "Build detections and response playbooks",
+      "Drive vulnerability management and testing",
+      "Support compliance and audits",
+      "Educate engineers on secure-by-default practices"
+    ],
+    requirements: [
+      "6+ years security engineering",
+      "Cloud security + threat modeling",
+      "Incident response experience",
+      "Comfort with SIEM/EDR/logging pipelines",
+      "Certs (CISSP/CISM) a plus"
+    ]
+  },
+  {
+    id: 8,
+    title: "AI Research Scientist — Alignment",
+    dept: "Data & AI",
+    icon: "🧪",
+    iconClass: "dept-data",
+    location: "Remote",
+    type: "Full-time",
+    salary: "$240,000 – $340,000 + equity",
+    level: "Senior",
+    posted: "6 days ago",
+    badges: [{cls:"badge-new", label:"New"}, {cls:"badge-remote", label:"Remote"}],
+    isHot: true,
+    description: "Improve instruction-following and safety via evaluation, alignment methods, and careful experimentation.",
+    responsibilities: [
+      "Design experiments for alignment improvements",
+      "Build safety/evaluation benchmarks",
+      "Research RLHF/DPO approaches",
+      "Collaborate with training teams",
+      "Publish and share findings"
+    ],
+    requirements: [
+      "PhD or equivalent research experience",
+      "Strong Python + ML frameworks",
+      "Alignment/evals familiarity",
+      "Publication record is a plus",
+      "Strong collaborative mindset"
+    ]
+  }
+];
+
+let activeLevel = '';
+
+document.getElementById('openCount').textContent = String(JOBS.length);
+
+function setLevel(level, el) {
+  activeLevel = level;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filterJobs();
+}
+
+function filterJobs() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const dept = document.getElementById('deptFilter').value;
+  const loc = document.getElementById('locationFilter').value;
+
+  const filtered = JOBS.filter(j => {
+    const matchSearch =
+      !search ||
+      j.title.toLowerCase().includes(search) ||
+      j.dept.toLowerCase().includes(search) ||
+      j.requirements.join(' ').toLowerCase().includes(search);
+
+    const matchDept = !dept || j.dept === dept;
+    const matchLoc = !loc || j.location === loc;
+    const matchLevel = !activeLevel || j.level === activeLevel;
+
+    return matchSearch && matchDept && matchLoc && matchLevel;
+  });
+
+  renderJobs(filtered);
+}
+
+function renderJobs(jobs) {
+  const grid = document.getElementById('jobsGrid');
+  if (jobs.length === 0) {
+    grid.innerHTML = `<div class="no-results"><div class="icon">🔭</div><h3>No roles found</h3><p>Try adjusting your filters or search terms.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = jobs.map(j => `
+    <div class="job-card" onclick="openModal(${j.id})">
+      <div class="job-card-header">
+        <div class="dept-icon ${j.iconClass}">${j.icon}</div>
+        <div class="job-badges">
+          ${j.isHot ? '<span class="badge badge-hot">🔥 Hot</span>' : ''}
+          ${j.badges.map(b => `<span class="badge ${b.cls}">${b.label}</span>`).join('')}
+        </div>
+      </div>
+      <div class="job-title">${j.title}</div>
+      <div class="job-dept">${j.dept}</div>
+      <div class="job-meta">
+        <span>📍 ${j.location}</span>
+        <span>💼 ${j.type}</span>
+        <span>🎯 ${j.level}</span>
+      </div>
+      <div class="job-salary">${j.salary}</div>
+      <div class="job-card-footer">
+        <button class="apply-btn" type="button">Apply Now →</button>
+        <span class="posted-date">Posted ${j.posted}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+let currentJob = null;
+
+function openModal(id) {
+  currentJob = JOBS.find(j => j.id === id);
+  document.getElementById('modalJobTitle').textContent = currentJob.title;
+  document.getElementById('modalJobMeta').textContent = `${currentJob.dept} · ${currentJob.location} · ${currentJob.type}`;
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-section">
+      <h3>About the Role</h3>
+      <p>${currentJob.description}</p>
+    </div>
+    <div class="modal-section">
+      <h3>What You'll Do</h3>
+      <ul>${currentJob.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul>
+    </div>
+    <div class="modal-section">
+      <h3>What We're Looking For</h3>
+      <ul>${currentJob.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+    </div>
+    <div class="modal-section">
+      <h3>Compensation</h3>
+      <p style="font-size:16px; font-weight:900; background: linear-gradient(135deg, #a855f7, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        ${currentJob.salary}
+      </p>
+    </div>
+
+    <div class="modal-section">
+      <h3>Apply for This Role</h3>
+      <div class="form-grid" id="appForm">
+        <div class="form-group">
+          <label>First Name</label>
+          <input id="fn" type="text" placeholder="Ada" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input id="ln" type="text" placeholder="Lovelace" required>
+        </div>
+        <div class="form-group full">
+          <label>Email Address</label>
+          <input id="em" type="email" placeholder="ada@example.com" required>
+        </div>
+        <div class="form-group full">
+          <label>LinkedIn / Portfolio URL</label>
+          <input id="url" type="url" placeholder="https://linkedin.com/in/yourprofile">
+        </div>
+        <div class="form-group full">
+          <label>Why Merge.AI?</label>
+          <textarea id="why" rows="4" placeholder="Tell us what excites you about this role and our mission…"></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Resume / CV</label>
+          <input id="cv" type="file" class="file-upload" accept=".pdf,.doc,.docx">
+        </div>
+        <div class="form-group full">
+          <label>How did you hear about us?</label>
+          <select id="src">
+            <option value="" disabled selected>Select an option…</option>
+            <option>LinkedIn</option>
+            <option>Twitter / X</option>
+            <option>Referral</option>
+            <option>Company blog</option>
+            <option>Job board</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <button class="submit-btn" type="button" onclick="submitApplication()">Submit Application ✦</button>
+        </div>
+        <div class="form-group full">
+          <p style="color:var(--muted);font-size:12px;line-height:1.6">
+            This is a front-end demo form (no backend). Hook it to your API later if you want real submissions.
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function submitApplication() {
+  document.getElementById('modalBody').innerHTML = `
+    <div class="success-state">
+      <div class="success-icon">✓</div>
+      <h3>Application Submitted!</h3>
+      <p>Thanks for applying to <strong>${currentJob.title}</strong>. We’ll review your application and reach out if there’s a match.</p>
+      <button class="apply-btn" onclick="closeModalDirect()" style="padding: 12px 28px; font-size: 14px;">Close</button>
+    </div>
+  `;
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+renderJobs(JOBS);
+</script>
+</body>
+</html>
