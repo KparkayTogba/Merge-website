@@ -1,7 +1,3 @@
-<!-- ===========================
-FILE: index.html
-Put this in your repo root as: index.html
-=========================== -->
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -181,11 +177,64 @@ Put this in your repo root as: index.html
 
     .stars { color: #fbbf24; letter-spacing: .05em; }
 
-    /* FAQ accordion */
-    .faq-item .answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .answer { max-height: 420px; }
-    .faq-item .chevron { transition: transform .3s; }
-    .faq-item.open .chevron { transform: rotate(180deg); }
+    /* Mock UI styles (were missing before) */
+    .mock-tab{
+      font-size: 12px;
+      color: rgba(240,244,255,.75);
+      border: 1px solid rgba(124,47,255,.18);
+      background: rgba(255,255,255,.03);
+      padding: 8px 10px;
+      border-radius: 999px;
+      line-height: 1;
+      user-select: none;
+    }
+    .mock-tab.active{
+      border-color: rgba(0,229,255,.35);
+      background: rgba(0,229,255,.08);
+      color: rgba(240,244,255,.92);
+    }
+    .mock-icon-card{
+      border: 1px solid rgba(124,47,255,.16);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align: center;
+      transition: transform .2s, border-color .2s;
+      min-height: 86px;
+    }
+    .mock-icon-card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(0,229,255,.25);
+    }
+
+    /* Stat number style (was missing before) */
+    .stat-num{
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1;
+      letter-spacing: -.02em;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* FAQ accordion (smooth + safe for long answers) */
+    #faq-accordion .faq-item .answer{
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    #faq-accordion .faq-item.open .answer{
+      max-height: 1200px; /* prevents cutting long answers */
+    }
+    #faq-accordion .faq-item .chevron{
+      transition: transform .3s;
+    }
+    #faq-accordion .faq-item.open .chevron{
+      transform: rotate(180deg);
+    }
 
     footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
     footer a:hover { color: var(--white); }
@@ -556,7 +605,7 @@ Put this in your repo root as: index.html
   </div>
 </section>
 
-<!-- FAQ (WITH ALL ANSWERS) -->
+<!-- FAQ (WITH ALL ANSWERS + WORKING DROPDOWNS) -->
 <section id="faq" class="py-24 px-6">
   <div class="max-w-3xl mx-auto reveal">
     <div class="text-center mb-14">
@@ -567,7 +616,7 @@ Put this in your repo root as: index.html
     <div id="faq-accordion" style="display:flex; flex-direction:column; gap:12px">
 
       <div class="faq-item card rounded-xl overflow-hidden">
-        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+        <button type="button" aria-expanded="false" class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
           <span>Is there a free trial for the Pro plan?</span>
           <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </button>
@@ -579,20 +628,20 @@ Put this in your repo root as: index.html
       </div>
 
       <div class="faq-item card rounded-xl overflow-hidden">
-        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+        <button type="button" aria-expanded="false" class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
           <span>What happens to my data if I cancel?</span>
           <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </button>
         <div class="answer">
           <p style="padding:0 20px 20px; font-size:14px; line-height:1.75; color:var(--muted)">
-            Your content is always yours. You can export your workspace any time. If you cancel, your account stays active until the end of your billing period.
-            After that we keep your data during a short grace window so you can restore. When that window ends, your data is scheduled for deletion.
+            Your content is always yours. You can export your workspace anytime. If you cancel, your account remains active until the end of your billing period.
+            After that, we keep your data for a short grace window so you can restore. When the window ends, your data is scheduled for deletion.
           </p>
         </div>
       </div>
 
       <div class="faq-item card rounded-xl overflow-hidden">
-        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+        <button type="button" aria-expanded="false" class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
           <span>How does the AI assistant work?</span>
           <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </button>
@@ -606,7 +655,7 @@ Put this in your repo root as: index.html
       </div>
 
       <div class="faq-item card rounded-xl overflow-hidden">
-        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+        <button type="button" aria-expanded="false" class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
           <span>Can I integrate Merge with other apps?</span>
           <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </button>
@@ -619,7 +668,7 @@ Put this in your repo root as: index.html
       </div>
 
       <div class="faq-item card rounded-xl overflow-hidden">
-        <button class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
+        <button type="button" aria-expanded="false" class="question w-full flex justify-between items-center p-5 text-left" style="background:transparent;border:none;cursor:pointer;color:var(--white);font-family:'Syne',sans-serif;font-weight:600;font-size:15px">
           <span>Does the waitlist actually save my email?</span>
           <svg class="chevron w-5 h-5" style="color:var(--muted);flex-shrink:0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
         </button>
@@ -705,7 +754,7 @@ Put this in your repo root as: index.html
 <div id="waitlistModal" class="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal-box">
     <div style="padding:32px 36px 28px; border-bottom:1px solid var(--border); position:relative">
-      <button onclick="closeWaitlistModal()" style="position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s">✕</button>
+      <button onclick="closeWaitlistModal(true)" style="position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s">✕</button>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
         <div class="logo-badge"><span class="logo-badge__m">M</span></div>
         <span class="wordmark" style="font-size:18px">Merge<span class="gradient-text">.AI</span></span>
@@ -756,7 +805,7 @@ Put this in your repo root as: index.html
   </div>
 </div>
 
-<!-- DEMO MODAL (REAL SECTION, NOT ALERT) -->
+<!-- DEMO MODAL (WORKING) -->
 <div id="demoModal" class="modal-overlay" onclick="closeDemoOutside(event)">
   <div class="modal-box" style="max-width:720px">
     <div style="padding:28px 32px; border-bottom:1px solid var(--border); position:relative">
@@ -767,7 +816,6 @@ Put this in your repo root as: index.html
 
     <div style="padding:22px 32px 30px">
       <div id="demoContainer" class="demo-frame">
-        <!-- Default placeholder -->
         Demo video placeholder (16:9). Replace with your YouTube/Vimeo embed URL in the script block.
       </div>
 
@@ -861,6 +909,7 @@ DEMO MODAL (WORKING)
 ----------------------- */
 const DEMO_URLS = {
   // Replace these with real embed URLs when you have them:
+  // Example: "https://www.youtube.com/embed/VIDEO_ID"
   placeholder: null,
   ai: null,
   collab: null
@@ -946,15 +995,40 @@ function closeFooterModalOutside(e) {
   if (e.target === document.getElementById('footerModal')) closeFooterModal();
 }
 
-/* FAQ accordion */
-document.querySelectorAll('.faq-item .question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+/* -----------------------
+FAQ accordion (dropdown answers, scoped to #faq-accordion)
+----------------------- */
+(function initFAQAccordion() {
+  const root = document.getElementById('faq-accordion');
+  if (!root) return;
+
+  const items = Array.from(root.querySelectorAll('.faq-item'));
+  const buttons = Array.from(root.querySelectorAll('.faq-item .question'));
+
+  function closeAll() {
+    items.forEach((item) => item.classList.remove('open'));
+    buttons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+  }
+
+  buttons.forEach((btn) => {
+    btn.setAttribute('type', 'button');
+    btn.setAttribute('aria-expanded', 'false');
+
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      closeAll();
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
-});
+
+  // Optional: open the first question by default
+  // buttons[0]?.click();
+})();
 
 /* Scroll reveal */
 const observer = new IntersectionObserver(entries => {
