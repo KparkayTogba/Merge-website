@@ -8,7 +8,7 @@
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CDN-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 ![No Build Step](https://img.shields.io/badge/No%20Build%20Step-✓-brightgreen)
-![AI Powered](https://img.shields.io/badge/AI%20Powered-Claude-D4500A?style=flat)
+
 
 ---
 
