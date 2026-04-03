@@ -23,7 +23,10 @@ Built for **speed, simplicity, and scalability**, with zero backend required for
 ---
 
 ## 📁 Project Structure
-
+├── index.html # Landing page
+├── careers.html # Job listings & filters
+├── JobApplication.html # Application form
+└── MergeAI_Onboarding.jsx # React onboarding app
 
 ---
 
